@@ -1,6 +1,10 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { Server } from "http";
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",").map((origin) => origin.trim())
+  : ["https://leaderboard-front.netlify.app"]; // fallback if .env missing
+
 const clients = new Set<WebSocket>();
 
 export function setupWebSocket(server: Server) {
@@ -8,9 +12,8 @@ export function setupWebSocket(server: Server) {
 
   wss.on("connection", (ws, req) => {
     const origin = req.headers.origin;
-    const allowedOrigin = "http://localhost:5173";
 
-    if (origin !== allowedOrigin) {
+    if (!origin || !allowedOrigins.includes(origin)) {
       console.warn("❌ Blocked WebSocket connection from:", origin);
       ws.close(1008, "Origin not allowed");
       return;
