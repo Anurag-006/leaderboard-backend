@@ -5,8 +5,8 @@ import userRoutes from "./routes/user.routes.js";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  "https://your-frontend.netlify.app", // Netlify deployed frontend
+  "http://localhost:5173", // Local Dev
+  "https://leaderboard-front.netlify.app", // Frontend
 ];
 
 app.use(
