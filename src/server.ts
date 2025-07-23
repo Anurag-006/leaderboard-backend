@@ -6,8 +6,7 @@ import { setupWebSocket } from "./ws/websocket.js";
 import http from "http";
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/leaderboard";
+const MONGO_URI = process.env.MONGO_URI || "";
 
 console.log("Mongo Uri is: ", process.env.MONGO_URI);
 
